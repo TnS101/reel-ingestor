@@ -15,7 +15,8 @@ $files = @(
     "ARCHITECTURE.md",
     "plan.md",
     "docs/CURRENT_ROADMAP.md",
-    "docs/TRACKER_POLICY.md"
+    "docs/TRACKER_POLICY.md",
+    "PROJECT_TRACKER.xlsx"
 )
 
 foreach ($f in $files) {

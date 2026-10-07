@@ -20,4 +20,4 @@ if ($content -notmatch [regex]::Escape($PlanId)) {
 
 Copy-Item "plan.md" $dest
 Write-Host "Archived current plan to $dest" -ForegroundColor Green
-Write-Host "Synchronize PROJECT_STATE.md and the live Google Sheet before the next independent Plan." -ForegroundColor Cyan
+Write-Host "Synchronize PROJECT_STATE.md and PROJECT_TRACKER.xlsx before the next independent Plan." -ForegroundColor Cyan

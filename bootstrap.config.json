@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "name": "REEL_INGESTOR_BROWSER_WORKFLOW_BOOTSTRAP",
-  "version": "1.0",
+  "version": "1.1",
   "execution_mode": "BROWSER_WORKER",
-  "repo_boundary": "Extract Reel Data code/control root only; runtime evidence remains in parent workspace",
+  "repo_boundary": "Extract Reel Data code/control root only; runtime evidence/corpus remains in parent workspace",
   "cost_policy": {
     "existing_approved_chatgpt_usage_allowed": true,
     "new_recurring_paid_runtime_or_service_requires_human_approval": true,
@@ -33,7 +33,9 @@
     "PROJECT_STATE.md",
     "ARCHITECTURE.md",
     "plan.md",
-    "docs/CURRENT_ROADMAP.md"
+    "docs/CURRENT_ROADMAP.md",
+    "docs/TRACKER_POLICY.md",
+    "PROJECT_TRACKER.xlsx"
   ],
   "mandatory_worker_context": [
     "BROWSER_WORKER_RULES.md",
@@ -45,8 +47,10 @@
     "plan-relevant source files"
   ],
   "tracker": {
-    "human_control_plane": "live Google Sheet",
-    "duplicate_local_spreadsheet_in_git": false
+    "human_control_plane": "PROJECT_TRACKER.xlsx",
+    "tracked_in_git": true,
+    "update_cadence": "accepted plan boundaries / material accepted roadmap changes",
+    "google_sheet_mirror": false
   },
   "report_states": [
     "IMPLEMENTED_PENDING_LOCAL_VERIFY",

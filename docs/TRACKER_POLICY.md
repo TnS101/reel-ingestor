@@ -1,8 +1,14 @@
-# TRACKER_POLICY.md — Live Google Sheet + Git State
+# TRACKER_POLICY.md — Repo-Tracked Project Tracker + Git State
 
-The user's live Google Sheet is the human-facing project tracker.
+`PROJECT_TRACKER.xlsx` is the human-facing project tracker for Reel Ingestor.
 
-It is intentionally **not copied into this Git repository** as a second spreadsheet because two manually maintained tracker files would drift.
+The Google Sheet mirror has been retired. The workbook now lives in the Git repository so the tracker version can be tied to accepted project checkpoints.
+
+## Update policy
+
+Do **not** edit/commit the workbook continuously during implementation.
+
+Update it at accepted Plan boundaries or when a material roadmap/decision change is formally accepted. This limits binary-file Git churn and keeps the tracker aligned with technical truth.
 
 ## State authority
 
@@ -12,17 +18,19 @@ When facts conflict, use:
 2. direct verification evidence;
 3. `ARCHITECTURE.md` for approved stable boundaries;
 4. `PROJECT_STATE.md` for current accepted technical reality;
-5. current/last `plan.md` for the partition boundary;
-6. live Google Sheet as the human-readable mirror;
+5. current/last `plan.md` for the Plan boundary;
+6. `PROJECT_TRACKER.xlsx` as the human-readable progress/control mirror;
 7. chat history last.
 
 ## Plan close
 
-After an accepted plan:
+After an accepted Plan:
 
-- Git checkpoint first;
-- update `PROJECT_STATE.md`;
-- update/archive `plan.md`;
-- human updates the live Google Sheet when the product progress row/state changed.
+1. create/identify the accepted Git checkpoint;
+2. update `PROJECT_STATE.md`;
+3. update `PROJECT_TRACKER.xlsx`;
+4. archive/replace `plan.md`;
+5. commit the synchronized control-state update if it is not already part of the accepted checkpoint;
+6. push the accepted state.
 
-If a future app/API can synchronize the tracker automatically, this policy can be revisited.
+The tracker must never claim a Plan is complete before the technical acceptance evidence exists.

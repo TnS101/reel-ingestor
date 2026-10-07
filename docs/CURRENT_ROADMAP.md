@@ -2,25 +2,43 @@
 
 - LAST UPDATED: 2026-10-07
 
-This is not a low-level permanent master plan. It only preserves the currently accepted phase skeleton from the live tracker.
+This is not a low-level permanent master plan. It preserves the currently accepted phase skeleton from `PROJECT_TRACKER.xlsx`.
 
 ## Completed
 
 ### 5.3 — Operationalize Browser Sol production extractor + human quality loop
 
 - STATUS: DONE / 100%
-- RESULT: Browser Sol production workflow validated on fresh non-GOLD Reels.
+- RESULT: Browser Sol production workflow validated on 4 fresh non-GOLD Reels.
+- AUDIT: 2 representative raw-evidence spot audits passed.
 - FROZEN: knowledge schema v1.0.0 + Browser production prompt v1.1.
+
+### P001_GIT_BASELINE — Project control prerequisite
+
+- STATUS: ACCEPTED / CLOSED
+- BASELINE: `f077a4a30ace95aa91936a46f42a506bd30a9ee3`
+- RESULT: private Git repository on `main`, clean rollback checkpoint, remote pushed.
 
 ## Current Critical Product Step
 
 ### 5.4 — Build manipulation + local corpus layer — P0
 
-Acceptance target:
+Current Plan:
 
-Canonical knowledge can be transformed into `HOW_TO`, `STEP_BY_STEP`, `REVERSE_ENGINEER`, `READ_BETWEEN_LINES`, `RECREATE_REEL`, `ADAPT_FORMAT`, and custom outputs, with prompt/context/output history retained. Derived outputs stay separate from canonical knowledge.
+`P002_CORPUS_STORAGE`
 
-Current prerequisite: complete `P001_GIT_BASELINE` before product implementation.
+First proof boundary:
+
+- local corpus/storage + query over real Production v1 canonical knowledge JSONs;
+- SQLite + filesystem provenance;
+- canonical inputs remain immutable;
+- runtime corpus stays outside Git.
+
+Manipulation generation is deliberately **after** P002 acceptance.
+
+Expected next Plan after P002:
+
+`P003_MANIPULATION_RECORDS`
 
 ## Deferred / later
 
@@ -42,7 +60,7 @@ Read-only usage/dependency audit before deleting anything.
 
 ### 6.5 — Recovery / operations playbook — P1 — Not Started
 
-Document cookie refresh, yt-dlp update, rollback and common recovery when it becomes useful; not current Critical Path.
+Document cookie refresh, yt-dlp update, rollback and common recovery when useful; not current Critical Path.
 
 ### 7.1 — Measure useful-insight yield by platform — P3 — Deferred
 

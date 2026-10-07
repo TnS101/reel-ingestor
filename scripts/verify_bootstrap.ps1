@@ -11,6 +11,7 @@ $required = @(
     "ARCHITECT_RULES.md",
     "BROWSER_WORKER_RULES.md",
     "PROJECT_STATE.md",
+    "PROJECT_TRACKER.xlsx",
     "ARCHITECTURE.md",
     "plan.md",
     "docs/CURRENT_ROADMAP.md",
