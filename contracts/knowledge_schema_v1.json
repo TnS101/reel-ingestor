@@ -1,0 +1,858 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "knowledge_schema_v1.json",
+  "title": "Short-form Knowledge Artifact v1",
+  "description": "Canonical knowledge object derived from Reel evidence. Raw evidence remains separate. Derived manipulation outputs must never overwrite this artifact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "generation",
+    "core_value",
+    "knowledge_units",
+    "claims",
+    "actionable_steps",
+    "mechanisms",
+    "entities",
+    "hidden_value",
+    "content_structure",
+    "limitations",
+    "taxonomy",
+    "human_review"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reel_id",
+        "url"
+      ],
+      "properties": {
+        "reel_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "creator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "caption": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "duration_sec": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "language": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visual_class": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "record_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transcript_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visual_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contact_sheet_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "prompt_version",
+        "generated_at",
+        "input_mode"
+      ],
+      "properties": {
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "input_mode": {
+          "type": "string",
+          "enum": [
+            "TEXT_EVIDENCE_ONLY",
+            "TEXT_PLUS_CONTACT_SHEET",
+            "TEXT_PLUS_SELECTED_FRAMES"
+          ]
+        },
+        "input_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "core_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "one_sentence",
+        "summary",
+        "why_it_matters",
+        "key_takeaways"
+      ],
+      "properties": {
+        "one_sentence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 3000
+        },
+        "why_it_matters": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1500
+        },
+        "key_takeaways": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 700
+          }
+        }
+      }
+    },
+    "knowledge_units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "title",
+          "content",
+          "provenance",
+          "evidence",
+          "confidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^KU_[0-9]{2,}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "TACTIC",
+              "PRINCIPLE",
+              "FRAMEWORK",
+              "PROCESS",
+              "HEURISTIC",
+              "EXAMPLE",
+              "WARNING",
+              "METRIC",
+              "OFFER",
+              "CONTENT_PATTERN",
+              "TOOL_USAGE"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "OBSERVED_EVIDENCE",
+              "CREATOR_CLAIM",
+              "INFERENCE",
+              "VERIFIED_FACT"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/evidence_ref"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "statement",
+          "claim_type",
+          "verification_status",
+          "evidence",
+          "confidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^CL_[0-9]{2,}$"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1500
+          },
+          "claim_type": {
+            "type": "string",
+            "enum": [
+              "OBSERVED_EVIDENCE",
+              "CREATOR_CLAIM",
+              "INFERENCE",
+              "VERIFIED_FACT"
+            ]
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "UNVERIFIED",
+              "PARTIALLY_VERIFIED",
+              "VERIFIED",
+              "DISPUTED",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence_ref"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "actionable_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "step",
+          "action",
+          "details",
+          "evidence",
+          "confidence"
+        ],
+        "properties": {
+          "step": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "details": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "prerequisites": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 500
+            }
+          },
+          "expected_output": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence_ref"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "mechanisms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "explanation",
+          "provenance",
+          "evidence",
+          "confidence"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 250
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "why_it_works": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1500
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 700
+            }
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "OBSERVED_EVIDENCE",
+              "CREATOR_CLAIM",
+              "INFERENCE",
+              "VERIFIED_FACT"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence_ref"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "type",
+          "role"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 250
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "TOOL",
+              "PLATFORM",
+              "PERSON",
+              "BRAND",
+              "PRODUCT",
+              "BOOK",
+              "FRAMEWORK",
+              "OTHER"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence_ref"
+            }
+          }
+        }
+      }
+    },
+    "hidden_value": {
+      "type": "array",
+      "description": "Useful deductions not directly stated. Must always remain explicit inference, never silently promoted to fact.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "insight",
+          "basis",
+          "classification",
+          "confidence",
+          "evidence"
+        ],
+        "properties": {
+          "insight": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1800
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1200
+          },
+          "classification": {
+            "type": "string",
+            "const": "INFERENCE"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "actionability": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/evidence_ref"
+            }
+          }
+        }
+      }
+    },
+    "content_structure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_format",
+        "hook",
+        "promise",
+        "proof_elements",
+        "timeline_beats",
+        "cta",
+        "visual_patterns",
+        "editing_patterns",
+        "reusable_structure"
+      ],
+      "properties": {
+        "primary_format": {
+          "type": "string",
+          "enum": [
+            "TALKING_HEAD",
+            "TUTORIAL",
+            "SCREEN_RECORDING",
+            "LISTICLE",
+            "STORY",
+            "CASE_STUDY",
+            "DEMO",
+            "VISUAL_ONLY",
+            "HYBRID",
+            "OTHER"
+          ]
+        },
+        "hook": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 800
+        },
+        "hook_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "promise": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "problem": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "proof_elements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 800
+          }
+        },
+        "timeline_beats": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "start_sec",
+              "role",
+              "description"
+            ],
+            "properties": {
+              "start_sec": {
+                "type": "number",
+                "minimum": 0
+              },
+              "end_sec": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "HOOK",
+                  "SETUP",
+                  "PROBLEM",
+                  "PROMISE",
+                  "PROOF",
+                  "TEACHING",
+                  "DEMO",
+                  "TRANSITION",
+                  "OBJECTION",
+                  "PAYOFF",
+                  "CTA",
+                  "OTHER"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1200
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/evidence_ref"
+                }
+              }
+            }
+          }
+        },
+        "cta": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 800
+        },
+        "visual_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          }
+        },
+        "editing_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          }
+        },
+        "reusable_structure": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "missing_information",
+        "ambiguities",
+        "contradictions",
+        "risk_flags"
+      ],
+      "properties": {
+        "missing_information": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        },
+        "ambiguities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        },
+        "risk_flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "UNVERIFIED_EARNINGS_CLAIM",
+              "UNVERIFIED_CAUSAL_CLAIM",
+              "MISSING_VISUAL_CONTEXT",
+              "LOW_TRANSCRIPT_CONFIDENCE",
+              "OCR_NOISE",
+              "PROMOTIONAL_BIAS",
+              "INCOMPLETE_PROCEDURE",
+              "OTHER"
+            ]
+          }
+        }
+      }
+    },
+    "taxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "topics",
+        "use_cases"
+      ],
+      "properties": {
+        "category": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 120
+          }
+        },
+        "use_cases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "HOW_TO",
+              "STEP_BY_STEP",
+              "REVERSE_ENGINEER",
+              "READ_BETWEEN_LINES",
+              "RECREATE_REEL",
+              "REWRITE_SCRIPT",
+              "ADAPT_FORMAT",
+              "EXTRACT_FRAMEWORK",
+              "COMPARE",
+              "CRITIQUE",
+              "TRAINING_EXAMPLE",
+              "OTHER"
+            ]
+          }
+        }
+      }
+    },
+    "human_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "quality_score",
+        "notes",
+        "reviewed_at"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "UNREVIEWED",
+            "APPROVED",
+            "GOLD",
+            "NEEDS_FIX",
+            "REJECT"
+          ]
+        },
+        "quality_score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "reviewed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidence_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type"
+      ],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "TRANSCRIPT",
+            "OCR",
+            "FRAME",
+            "CAPTION",
+            "METADATA"
+          ]
+        },
+        "start_sec": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "end_sec": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "frame_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "quote_or_observation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        }
+      }
+    }
+  }
+}

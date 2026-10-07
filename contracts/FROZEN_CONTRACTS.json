@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-10-07",
+  "contracts": [
+    {
+      "path": "contracts/knowledge_schema_v1.json",
+      "version": "1.0.0",
+      "sha256": "e14dde9967dd0f65d75bd1dc4ead32823bba0a831d323757c33042182d468476",
+      "status": "FROZEN_PRODUCTION_V1",
+      "upgrade_policy": "Only when real production evidence exposes a material blocker or repeated error; version explicitly."
+    },
+    {
+      "path": "contracts/BROWSER_SOL_PRODUCTION_PROMPT_v1_1.txt",
+      "version": "browser_production_v1.1",
+      "sha256": "6937109ba3dcf184e49e4c9fd4a4731be967de564cf6f3f29d3130dcc4556f28",
+      "status": "FROZEN_PRODUCTION_V1",
+      "upgrade_policy": "Only when real production evidence exposes a material blocker or repeated error; version explicitly."
+    }
+  ]
+}

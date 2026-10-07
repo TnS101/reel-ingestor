@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "name": "REEL_INGESTOR_BROWSER_WORKFLOW_BOOTSTRAP",
+  "version": "1.0",
+  "execution_mode": "BROWSER_WORKER",
+  "repo_boundary": "Extract Reel Data code/control root only; runtime evidence remains in parent workspace",
+  "cost_policy": {
+    "existing_approved_chatgpt_usage_allowed": true,
+    "new_recurring_paid_runtime_or_service_requires_human_approval": true,
+    "prefer_free_or_local_when_adequate": true
+  },
+  "research_gate": {
+    "mode": "CONDITIONAL",
+    "trigger_on": [
+      "new mechanism",
+      "new dependency/service/API",
+      "new architecture component",
+      "meaningful build-vs-reuse decision"
+    ],
+    "fixed_project_count_required": false,
+    "stop_when_additional_research_unlikely_to_change_decision": true
+  },
+  "plan_partition": {
+    "fresh_architect_chat_per_plan": true,
+    "fresh_browser_worker_chat_per_plan": true,
+    "same_architect_chat_reviews_its_plan": true,
+    "default_max_focused_repairs": 1,
+    "worker_may_choose_next_plan": false,
+    "local_verification_required_before_acceptance": true
+  },
+  "mandatory_architect_context": [
+    "ARCHITECT_RULES.md",
+    "PROJECT_STATE.md",
+    "ARCHITECTURE.md",
+    "plan.md",
+    "docs/CURRENT_ROADMAP.md"
+  ],
+  "mandatory_worker_context": [
+    "BROWSER_WORKER_RULES.md",
+    "plan.md",
+    "ARCHITECTURE.md",
+    "PROJECT_STATE.md",
+    "docs/TEST_STRATEGY.md",
+    "GIT_BASELINE.txt",
+    "plan-relevant source files"
+  ],
+  "tracker": {
+    "human_control_plane": "live Google Sheet",
+    "duplicate_local_spreadsheet_in_git": false
+  },
+  "report_states": [
+    "IMPLEMENTED_PENDING_LOCAL_VERIFY",
+    "BLOCKED",
+    "FAIL"
+  ],
+  "plan_archive_path": "docs/plans/archive/<PLAN_ID>.md"
+}

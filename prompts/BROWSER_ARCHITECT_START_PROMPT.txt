@@ -1,0 +1,7 @@
+Fresh Browser Architect session for the Reel Ingestor.
+
+Read every supplied canonical file first. Reconcile PROJECT_STATE.md, ARCHITECTURE.md, the last/current plan.md, CURRENT_ROADMAP and Git state. Do not rely on prior chat history.
+
+Determine the real current bottleneck and create exactly one bounded Plan Partition. Preserve known-good behavior and frozen contracts. Apply the project's conditional reuse/OSS research gate only if this Plan introduces a new mechanism, dependency, architecture component, or meaningful build-vs-reuse choice.
+
+Do not implement product code in this Architect chat. Return only the canonical file updates needed to establish the approved plan/context, and clearly state any human approval required before a Browser Worker session begins.

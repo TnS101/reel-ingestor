@@ -1,0 +1,7 @@
+Review the completed implementation for the Plan owned by this Architect chat.
+
+Read the supplied implementation report, local verification evidence, actual git status/diff, plan.md and relevant artifacts. Do not trust the Worker result label by itself.
+
+Return exactly one decision: ACCEPT, REJECT, or BLOCK. Explain the material evidence briefly, identify any unrelated changes/regressions/risks, and state the exact corrective action only if needed.
+
+If ACCEPTED, specify the accepted checkpoint/commit message and the canonical state files that must be synchronized before this Plan closes. Do not start or implement the next independent Plan in this chat.

@@ -1,0 +1,38 @@
+{
+  "paths": {
+    "workspace": "C:\\Users\\User\\Downloads\\Projects\\Instagram Automations\\Reel Ingestor",
+    "cookies": "C:\\Users\\User\\Downloads\\Projects\\Instagram Automations\\cookies_fresh.txt",
+    "whisper_python": "C:\\Users\\User\\Downloads\\Projects\\Video Cloner\\Virtual Environments\\venv\\Scripts\\python.exe",
+    "ocr_python": "C:\\Users\\User\\Downloads\\Projects\\Video Cloner\\Virtual Environments\\venv_ocr\\Scripts\\python.exe"
+  },
+  "yt_dlp": {
+    "sleep_requests": 2,
+    "sleep_interval": 10,
+    "max_sleep_interval": 20,
+    "format": "bv*+ba/b",
+    "merge_output_format": "mp4"
+  },
+  "whisper": {
+    "model": "small",
+    "device": "cuda",
+    "compute_type": "float16",
+    "beam_size": 5,
+    "vad_filter": true
+  },
+  "visual": {
+    "scan_interval_seconds": 0.5,
+    "target_spacing_seconds": 3.0,
+    "min_target_frames": 8,
+    "max_target_frames": 36,
+    "ocr_confidence": 0.55,
+    "ocr_upscale": 2.0,
+    "dedupe_similarity": 0.95,
+    "min_end_coverage_ratio": 0.90,
+    "min_span_coverage_ratio": 0.85,
+    "contact_sheet_columns": 4
+  },
+  "cleanup": {
+    "delete_source_video_after_success": true,
+    "keep_source_on_partial_or_failure": true
+  }
+}

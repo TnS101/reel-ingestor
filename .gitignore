@@ -1,0 +1,52 @@
+# --- Secrets / auth ---
+.env
+.env.*
+!.env.example
+cookies*.txt
+*cookie*.txt
+credentials.*
+secrets.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# --- Python / environments ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Local execution / generated files ---
+*.log
+*.tmp
+*.temp
+batch_*.txt
+batch*.txt
+source.mp4
+source.mkv
+source.webm
+source.mov
+source.info.json
+results.jsonl
+runs/
+Gold Results/
+browser_production_pack_v1/
+
+# --- Browser workflow handoffs / heavy evidence ---
+.handoffs/
+.local_verify/
+.agent/artifacts/
+
+# Reports under .agent/reports may be tracked when accepted/useful.
