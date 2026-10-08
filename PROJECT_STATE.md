@@ -40,10 +40,10 @@ A saved Reel can be ingested safely, converted into high-quality evidence-ground
 
 - `P001_GIT_BASELINE`: ACCEPTED / CLOSED.
 - P001 accepted baseline commit: `f077a4a30ace95aa91936a46f42a506bd30a9ee3`.
-- Current P002 implementation baseline: `be51d4800320edc2bfdcca075fbfb358bc137013`.
+- P002 implementation baseline: exact approved Plan checkpoint SHA supplied in the Browser Worker handoff; do not use moving `main`.
 - Branch: `main`.
 - Private GitHub remote: `TnS101/reel-ingestor`.
-- `be51d4800320edc2bfdcca075fbfb358bc137013` is the P001-close/control-sync commit that prepared P002.
+- `be51d4800320edc2bfdcca075fbfb358bc137013` is the historical P001-close/control-sync commit on which the P002 draft was prepared; it is not the Worker implementation baseline after Plan approval.
 - Git + direct verification evidence are technical truth.
 - `PROJECT_TRACKER.xlsx` is the versioned human-facing project tracker.
 
@@ -64,7 +64,7 @@ Manipulation generation comes only after this storage/query boundary passes.
 - WORKER SESSION: `BWORK-P002_CORPUS_STORAGE`
 - STATUS: `APPROVED — READY_FOR_BROWSER_WORKER`
 - BASELINE BRANCH: `main`
-- BASELINE COMMIT: `be51d4800320edc2bfdcca075fbfb358bc137013`
+- BASELINE COMMIT: exact approved Plan checkpoint SHA supplied in the Architect Worker handoff
 - WORKER REPO PATCH BOUNDARY: `corpus_store.py` + `tests/test_corpus_store.py` only
 
 ## Main constraint

@@ -28,7 +28,7 @@ Current Plan:
 `P002_CORPUS_STORAGE`
 
 - STATUS: `APPROVED — READY_FOR_BROWSER_WORKER`
-- IMPLEMENTATION BASELINE: `be51d4800320edc2bfdcca075fbfb358bc137013`
+- IMPLEMENTATION BASELINE: exact approved Plan checkpoint SHA supplied in the Architect Worker handoff
 
 First proof boundary:
 

@@ -7,8 +7,8 @@
 - PLAN TYPE: PRODUCT / KNOWLEDGE LAYER
 - ROADMAP STEP: `5.4 — Build manipulation + local corpus layer`
 - BASELINE BRANCH: `main`
-- BASELINE COMMIT: `be51d4800320edc2bfdcca075fbfb358bc137013`
-- BASELINE RULE: Browser Worker must read and implement against this exact commit. Do not use a later moving `main` HEAD. `GIT_BASELINE.txt` is optional handoff evidence and is not required when GitHub provides the canonical files directly.
+- BASELINE COMMIT: supplied by the Architect in the Worker handoff; it must be the commit that contains this approved Plan and synchronized control state.
+- BASELINE RULE: Browser Worker must read and implement from that exact handoff SHA, not a later moving `main` HEAD. `GIT_BASELINE.txt` is optional handoff evidence and is not required when GitHub provides the canonical files directly.
 
 ## 1. Objective
 
@@ -273,7 +273,7 @@ git status --short
 Required:
 
 - branch = `main`;
-- HEAD = `be51d4800320edc2bfdcca075fbfb358bc137013`;
+- HEAD = the exact baseline SHA supplied in the Architect Worker handoff;
 - worktree clean;
 - bootstrap result = `READY_FOR_WORK`.
 
@@ -414,7 +414,7 @@ After acceptance, the accepted Git checkpoint is the rollback boundary. Runtime 
 
 STOP and return to Architect if:
 
-- baseline is not exactly `main` at `be51d4800320edc2bfdcca075fbfb358bc137013` before Worker application;
+- baseline is not exactly `main` at the handoff SHA before Worker application;
 - required schema/prompt changes appear necessary;
 - ingestion/config/protected files must change;
 - a third-party DB/ORM/vector/validation dependency appears necessary;
