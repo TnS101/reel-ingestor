@@ -1,6 +1,6 @@
 # CURRENT_ROADMAP.md — Stable Phase Skeleton
 
-- LAST UPDATED: 2026-10-07
+- LAST UPDATED: 2026-10-08
 
 This is not a low-level permanent master plan. It preserves the currently accepted phase skeleton from `PROJECT_TRACKER.xlsx`.
 
@@ -27,12 +27,19 @@ Current Plan:
 
 `P002_CORPUS_STORAGE`
 
+- STATUS: `APPROVED — READY_FOR_BROWSER_WORKER`
+- IMPLEMENTATION BASELINE: `be51d4800320edc2bfdcca075fbfb358bc137013`
+
 First proof boundary:
 
 - local corpus/storage + query over real Production v1 canonical knowledge JSONs;
-- SQLite + filesystem provenance;
+- Python standard-library SQLite + filesystem provenance;
+- immutable SHA-256-addressed artifact versions;
+- same Reel ID may retain multiple different immutable hashes;
+- deterministic list/get/search with machine-readable JSON;
 - canonical inputs remain immutable;
-- runtime corpus stays outside Git.
+- runtime corpus stays outside Git;
+- Worker implementation patch is limited to `corpus_store.py` + `tests/test_corpus_store.py`.
 
 Manipulation generation is deliberately **after** P002 acceptance.
 

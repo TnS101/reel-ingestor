@@ -1,7 +1,7 @@
 # PROJECT_STATE.md — Reel Ingestor
 
-- STATE VERSION: S2
-- LAST UPDATED: 2026-10-07
+- STATE VERSION: S3
+- LAST UPDATED: 2026-10-08
 - REPO ROOT: `C:\Users\User\Downloads\Projects\Instagram Automations\Reel Ingestor\Extract Reel Data`
 - HUMAN TRACKER: `PROJECT_TRACKER.xlsx` in the Git repository
 - TRACKER UPDATE RULE: update/commit at accepted Plan boundaries, not continuously during implementation
@@ -39,30 +39,33 @@ A saved Reel can be ingested safely, converted into high-quality evidence-ground
 ### Project control
 
 - `P001_GIT_BASELINE`: ACCEPTED / CLOSED.
-- Accepted baseline commit: `f077a4a30ace95aa91936a46f42a506bd30a9ee3`.
+- P001 accepted baseline commit: `f077a4a30ace95aa91936a46f42a506bd30a9ee3`.
+- Current P002 implementation baseline: `be51d4800320edc2bfdcca075fbfb358bc137013`.
 - Branch: `main`.
 - Private GitHub remote: `TnS101/reel-ingestor`.
-- Baseline was pushed successfully and local worktree was clean.
+- `be51d4800320edc2bfdcca075fbfb358bc137013` is the P001-close/control-sync commit that prepared P002.
 - Git + direct verification evidence are technical truth.
 - `PROJECT_TRACKER.xlsx` is the versioned human-facing project tracker.
 
 ## Current Critical Path
 
-Step 5.4 is now active.
+Step 5.4 is active.
 
 Current bounded target:
 
-**P002_CORPUS_STORAGE -> define and prove the smallest local corpus/storage + query layer using real Production v1 canonical knowledge JSONs.**
+**P002_CORPUS_STORAGE -> prove the smallest local corpus/storage + query layer using real Production v1 canonical knowledge JSONs.**
 
-Manipulation generation comes after this storage/query boundary passes.
+Manipulation generation comes only after this storage/query boundary passes.
 
 ## Current Plan
 
 - PLAN ID: `P002_CORPUS_STORAGE`
 - ARCHITECT SESSION: `ARCH-P002_CORPUS_STORAGE`
 - WORKER SESSION: `BWORK-P002_CORPUS_STORAGE`
-- STATUS: PLANNED — fresh Architect must reconcile/approve before Worker
-- BASELINE: clean `main` HEAD after the P001-close/control-sync commit; exact SHA captured in `GIT_BASELINE.txt`
+- STATUS: `APPROVED — READY_FOR_BROWSER_WORKER`
+- BASELINE BRANCH: `main`
+- BASELINE COMMIT: `be51d4800320edc2bfdcca075fbfb358bc137013`
+- WORKER REPO PATCH BOUNDARY: `corpus_store.py` + `tests/test_corpus_store.py` only
 
 ## Main constraint
 
@@ -75,9 +78,13 @@ The current constraint is the absence of a durable local corpus/index for real P
 - Python standard-library `sqlite3`.
 - Runtime corpus DB under the parent Reel Ingestor workspace, outside Git.
 - Filesystem paths + SHA-256 provenance retained.
+- Artifact identity is exact imported-file SHA-256.
+- Exact re-import is idempotent.
+- Different hashes for the same Reel ID coexist as separate immutable versions.
 - Canonical knowledge remains immutable.
+- List/get/search expose machine-readable JSON and exact Reel ID + artifact hash identity.
 - No media/image BLOB storage.
-- No external DB/ORM/vector dependency unless a later measured need justifies it.
+- No external DB/ORM/vector/FTS/validation dependency unless a later measured need justifies it.
 
 ## Known stable contracts
 
@@ -87,6 +94,7 @@ The current constraint is the absence of a durable local corpus/index for real P
 - Browser production prompt v1.1 frozen.
 - Canonical knowledge is immutable relative to derived manipulations.
 - Runtime evidence/corpus data stays outside the code repo.
+- P002 does not modify ingestion/config/frozen-contract files.
 
 ## Current external workspace
 
@@ -107,12 +115,14 @@ Known runtime/support areas outside repo include:
 - Instagram auth/cookies can expire and halt acquisition.
 - Browser Sol extraction is manual; accepted until manual transfer becomes a measured bottleneck.
 - Existing Video Cloner Python environments remain dependencies; cleanup is deferred pending usage audit.
-- Corpus design must not create a second mutable source of truth or silently overwrite canonical artifacts.
+- Corpus design must not create a second mutable source of truth or silently overwrite canonical artifact versions.
+- Same-Reel version retrieval must remain deterministic so future manipulations can link to an exact canonical hash.
 - Project-state drift is controlled through Git checkpoints, bounded Plans, fresh Browser sessions and the repo-tracked tracker.
 
 ## Deferred / not current
 
 - manipulation generation until P002 passes;
+- FTS/vector/semantic search until measured need;
 - mini web app/UI;
 - automated Browser/API extraction;
 - scheduling/queue automation;

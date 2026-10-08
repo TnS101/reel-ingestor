@@ -71,11 +71,11 @@ Only decisions worth revisiting belong here.
 
 ### D009 — Keep live Google Sheet as human tracker; do not duplicate it in Git
 
-- STATUS: VALIDATED
+- STATUS: SUPERSEDED BY D011
 - TYPE: STATE MANAGEMENT
 - DECISION: Git stores technical state/plan/decisions; the user's live Google Sheet remains the human progress mirror.
-- WHY: A duplicated local spreadsheet would quickly become stale and create competing state authorities.
-- REVISIT TRIGGER: automated tracker synchronization is later built into the app/workflow.
+- WHY: This was the previous tracker policy before the repository-tracked workbook was adopted.
+- REVISIT TRIGGER: none; see D011.
 
 ### D010 — Git root is the actual code folder, not the evidence workspace
 
@@ -84,3 +84,22 @@ Only decisions worth revisiting belong here.
 - DECISION: Git root is `Extract Reel Data`; generated `runs`, `results.jsonl`, Gold results and browser-pack exports remain in the parent workspace.
 - WHY: Keeps source/control history small and avoids tracking bulky generated evidence.
 - REVISIT TRIGGER: future app architecture requires a monorepo or versioned fixtures/data subset.
+
+### D011 — Use repo-tracked PROJECT_TRACKER.xlsx as the human progress/control mirror
+
+- DATE: 2026-10-07
+- STATUS: VALIDATED
+- TYPE: STATE MANAGEMENT
+- DECISION: `PROJECT_TRACKER.xlsx` is the versioned human-facing tracker. Git/direct evidence remain technical truth; the workbook is updated at accepted Plan/material roadmap boundaries rather than continuously.
+- WHY: The project now has a small Git repository and can tie tracker state to accepted checkpoints without maintaining a separate Google Sheet authority.
+- REVISIT TRIGGER: tracker synchronization becomes automated elsewhere or binary workbook churn becomes materially costly.
+
+### D012 — Use standard-library SQLite for the first local corpus layer
+
+- DATE: 2026-10-08
+- STATUS: APPROVED FOR P002
+- TYPE: ARCHITECTURE / STORAGE
+- DECISION: P002 uses Python standard-library `sqlite3` plus filesystem provenance/artifact paths. Runtime corpus data stays outside Git. Artifact identity is exact imported-file SHA-256; different hashes for the same Reel ID coexist immutably.
+- WHY: It satisfies the current durability/query/versioning boundary without a server, ORM, third-party package, recurring cost, or premature semantic-search infrastructure.
+- REJECTED FOR P002: loose-file-only scanning as the durable index; external DB/server; ORM; FTS/vector/embedding service; general-purpose JSON Schema dependency.
+- REVISIT TRIGGER: measured corpus size, search quality/latency, concurrency, or app requirements make the simple local SQLite boundary insufficient.
